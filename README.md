@@ -264,6 +264,18 @@ The reference image is auto-resized to the driving frame size and run
 through the same crop / motion-extraction pipeline as the driving frames,
 so any reasonably tight portrait crop works.
 
+## 3DMM-based face tracking
+
+The 3DMM-based face tracking used in our paper is implemented in a
+separate repository:
+[ymxbj/face_tracking](https://github.com/ymxbj/face_tracking).
+
+## Release
+
+- [x] Inference code
+- [ ] Training code
+- [ ] Expression editing benchmark
+
 ## Citation
 
 If you find PerformRecast useful in your research, please cite our paper and
