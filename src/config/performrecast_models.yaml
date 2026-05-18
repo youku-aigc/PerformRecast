@@ -1,0 +1,146 @@
+dataset_params:
+  frame_shape: [512, 512, 3]
+  face_shape: [256, 256, 3]
+  patch_shape: [128, 128, 3]
+  id_sampling: False
+  pairs_list: None
+  augmentation_params:
+    flip_param:
+      horizontal_flip: True
+      time_flip: True
+    jitter_param:
+      brightness: 0.1
+      contrast: 0.1
+      saturation: 0.1
+      hue: 0.1
+    blur_param:
+      blur_kernel_size: 41
+      kernel_list: [ 'iso', 'aniso' ]
+      kernel_prob: [ 0.5, 0.5 ]
+      blur_sigma: [ 0.1, 5 ]
+      downsample_range: [ 0.8, 8 ]
+      noise_range: [ 0, 20 ]
+      jpeg_range: [ 60, 100 ]
+
+model_params:
+  common_params:
+    num_kp: 49
+    image_channel: 3
+    feature_channel: 32
+    estimate_jacobian: False
+  appearance_feature_extractor_params: # the F in the paper
+    image_channel: 3
+    block_expansion: 64
+    num_down_blocks: 2
+    max_features: 512
+    reshape_channel: 32
+    reshape_depth: 16
+    num_resblocks: 6
+    dinov2_finetune: True
+  motion_extractor_params:
+    num_kp: 49
+    backbone: 'convnextv2_full'
+  warping_module_params: # the W in the paper
+    num_kp: 49
+    block_expansion: 64
+    max_features: 512
+    num_down_blocks: 2
+    reshape_channel: 32
+    estimate_occlusion_map: True
+    dense_motion_params:
+      block_expansion: 32
+      max_features: 1024
+      num_blocks: 5
+      reshape_depth: 16
+      compress: 4
+  spade_generator_params: # the G in the paper
+    upscale: 2 # represents upsample factor 256x256 -> 512x512
+    block_expansion: 64
+    max_features: 512
+    num_down_blocks: 2
+  discriminator_params:
+    scales: [1]
+    block_expansion: 32
+    max_features: 512
+    num_blocks: 4
+    sn: True
+  face_discriminator_params:
+    scales: [1]
+    block_expansion: 32
+    max_features: 512
+    num_blocks: 3
+    sn: True
+  lip_discriminator_params:
+    scales: [1]
+    block_expansion: 32
+    max_features: 512
+    num_blocks: 2
+    sn: True
+
+train_params:
+  num_epochs: 400
+  num_repeats: 1
+  epoch_milestones: [200, 320]
+  lr_t3d_feature_extractor: 5.0e-5
+  lr_motion_extractor: 1.2e-4
+  lr_warp_model: 1.2e-4
+  lr_spade_decoder: 1.2e-4
+  lr_discriminator: 1.0e-4
+  lr_face_discriminator: 2.5e-5
+  lr_lip_discriminator: 1.25e-5
+  gan_mode: 'hinge'    # hinge or ls
+  batch_size: 16
+  scales: [1, 0.5, 0.25, 0.125]
+  scales_face: [1, 0.5, 0.25]
+  scales_patch: [1]
+  gan_scales: [1]
+  checkpoint_freq: 1
+  hopenet_snapshot: './Local/Model/Input/hopenet_robust_alpha1.pth'
+  transform_params:
+    sigma_affine: 0.05
+    sigma_tps: 0.005
+    points_tps: 5
+  exp_param:
+    x_std: 0.001
+    y_std: 0.001
+    z_std: 0.010
+  loss_weights:
+    generator_gan: 1
+    discriminator_gan: 1
+    face_generator_gan: 1
+    face_discriminator_gan: 1
+    lip_generator_gan: 1
+    lip_discriminator_gan: 1
+    eye_generator_gan: 0
+    eye_discriminator_gan: 0
+    feature_matching: [10, 10, 10, 10]
+    feature_matching_epoch: 0
+    face_feature_matching: [20, 20, 20]
+    face_feature_matching_epoch: 0
+    lip_feature_matching: [20, 20]
+    lip_feature_matching_epoch: 0
+    perceptual: [10, 10, 10, 10, 10]
+    face_perceptual: [20, 20, 20, 20, 20]
+    patch_perceptual: [40, 40, 40, 40, 40]
+    positive_perceptual: [20, 20, 20, 20, 20]
+    negative_perceptual: [20, 20, 20, 20, 20]
+    l1: 10
+    face_l1: 20
+    patch_l1: 50
+    positive_l1: 20
+    negative_l1: 20
+    equivariance_jacobian: 0
+    canonical_consistency: 50
+    flame: 1
+    headpose: 0
+    keypoint: 50
+    expression_delta: 500
+    expression: 50
+    face_id: 50
+    canonical: 50
+
+
+visualizer_params:
+  kp_size: 2
+  draw_border: True
+  colormap: 'gist_rainbow'

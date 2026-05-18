@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+push.sh
+
+# Virtual environments
+.venv/
+venv/
+env/
+.conda/
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project-specific
+*.log
+*.tmp
+
+# Large model checkpoints
+*.pth
+*.pt
+*.onnx
+*.ckpt
+*.safetensors
+
+# Jupyter
+.ipynb_checkpoints/

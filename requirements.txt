@@ -1,0 +1,19 @@
+# PerformRecast inference dependencies.
+
+numpy
+pyyaml
+pillow
+opencv-python
+imageio
+imageio-ffmpeg
+rich
+tyro
+typing_extensions
+pykalman
+onnxruntime-gpu
+pytorch-lightning
+timm
+requests
+
+# Used by scripts/download_weights.sh; the script also auto-installs if missing.
+gdown
