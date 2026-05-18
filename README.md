@@ -169,15 +169,6 @@ If you prefer to download manually, all checkpoints are hosted on Google Drive:
 | `buffalo_l.zip` (InsightFace)          | [Google Drive](https://drive.google.com/file/d/1U6Tgh4Rshhr-vbedvkEr2i4J_yN-C7u9/view?usp=sharing) |
 | `landmark.onnx`                        | [Google Drive](https://drive.google.com/file/d/1CjnT5pT1dKIE2SYuizBlhRge2fTohA4w/view?usp=sharing) |
 
-The InsightFace `buffalo_l` weights, the 203-points `landmark.onnx` and
-the DINO ViT-B/16 backbone (`vit_base_patch16_224.dino`) are mirrors of
-files released upstream
-([LivePortrait](https://github.com/KlingAIResearch/LivePortrait) /
-[timm](https://huggingface.co/timm/vit_base_patch16_224.dino)) and are
-subject to the upstream licenses (see [License](#license) below).
-
-If you need to keep the DINO checkpoint outside `pretrained_weights/`,
-point the loader at it with `PERFORMRECAST_DINO_CKPT=/abs/path/to/pytorch_model.bin`.
 
 ## Quick start
 
