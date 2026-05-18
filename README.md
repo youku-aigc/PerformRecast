@@ -300,6 +300,12 @@ open-source projects:
 
 We thank the authors of these projects for making their work available.
 
+## Contact
+
+If you have any questions, please contact
+[liangjiadong.ljd@alibaba-inc.com](mailto:liangjiadong.ljd@alibaba-inc.com)
+or [xiongbojun@pku.edu.cn](mailto:xiongbojun@pku.edu.cn).
+
 ## License
 
 This project is released under the [MIT License](LICENSE). Note that the
