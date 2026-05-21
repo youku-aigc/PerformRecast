@@ -23,24 +23,13 @@ HUJING Digital Media &amp; Entertainment Group
 
 ---
 
-## Overview
+## Abstract
 
-PerformRecast is an inference framework for **expression-only portrait video
-editing**: given a *source* portrait video and a *driving* portrait video, it
-transfers the driving expression onto the source while **preserving the source
-head pose, identity and appearance**. The key idea is an explicit
-disentanglement between facial expression and head pose at the implicit-keypoint
-level, which lets the model edit a subject's **facial expression** without
-ever touching their **head pose**.
+We propose PerformRecast, a versatile **expression-only video editing** method which is dedicated to recast the performance in existing film and animation. The key insight of our method comes from the characteristics of 3D Morphable Face Model (3DMM), which models the face identity, facial expression and head pose of 3D face mesh with separate parameters. Therefore, we improve the keypoints transformation formula in previous methods to make it more consistent with 3DMM model, which achieves a better disentanglement and provides users with much more fine-grained control. Furthermore, to avoid the misalignment around the boundary of face in generated results, we decouple the facial and non-facial regions of input portrait images and pre-train a teacher model to provide separate supervision for them. Extensive experiments show that our method produces high-quality results which are more faithful to the driving video, outperforming existing methods in both controllability and efficiency.
 
-This repository contains the official inference code, configuration files and
-helper utilities used to produce the results in the paper.
+This repository contains the official code to reproduce the results in the paper.
 
-> **Note.** PerformRecast builds on top of
-> [LivePortrait](https://github.com/KlingAIResearch/LivePortrait) — the appearance
-> feature extractor (F), motion extractor (M), warping module (W) and SPADE
-> generator (G) are re-trained for the disentangled-expression formulation
-> proposed in our paper. Please cite both works when using this code.
+> **Note.** PerformRecast builds on top of [LivePortrait](https://github.com/KlingAIResearch/LivePortrait) — the appearance feature extractor (F), motion extractor (M), warping module (W) and SPADE generator (G) are re-trained for the expression-only performance editing task proposed in our paper.
 
 <table>
 <tr>
@@ -57,9 +46,9 @@ Side-by-side comparison &nbsp;·&nbsp; `[reference | driving | source-crop | edi
 
 ![Side-by-side comparison](./assets/demo/comparison.gif)
 
-## Method Overview
+## Code Overview
 
-PerformRecast follows a four-stage inference pipeline:
+PerformRecast adopts a four-stage inference pipeline:
 
 1. **Crop & align** the source and driving videos with InsightFace + a
    203-points landmark detector.
@@ -72,8 +61,7 @@ PerformRecast follows a four-stage inference pipeline:
    identity, then warp / decode with the warping module *W* and SPADE
    generator *G*.
 
-Two inference modes control how the source and driving expressions are
-fused:
+Two inference modes control how the driving expression edits the source video:
 
 | `--inference-mode` | Behaviour                                                                |
 | :----------------: | :----------------------------------------------------------------------- |
@@ -286,9 +274,7 @@ the underlying LivePortrait work:
 This work is built on top of, and uses code / models from, several excellent
 open-source projects:
 
-- [LivePortrait](https://github.com/KlingAIResearch/LivePortrait) — the appearance,
-  motion, warping and SPADE-generator architectures and the keypoint-based
-  animation framework.
+- [LivePortrait](https://github.com/KlingAIResearch/LivePortrait) — the appearance feature extractor, motion extractor, warping module, SPADE-generator architectures and the keypoint-based animation framework.
 - [FLAME](https://flame.is.tue.mpg.de/) — the head model and vertex masks
   used in `assets/FLAME_masks/`.
 - [InsightFace](https://github.com/deepinsight/insightface) — face detection
