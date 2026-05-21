@@ -257,8 +257,7 @@ separate repository:
 
 ## Citation
 
-If you find PerformRecast useful in your research, please cite our paper and
-the underlying LivePortrait work:
+If you find PerformRecast useful in your research, please consider citing our paper:
 
 ```bibtex
 @article{liang2026performrecast,
