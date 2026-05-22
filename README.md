@@ -87,7 +87,7 @@ PerformRecast/
 │   └── utils/                  # I/O, cropping, smoothing, helpers
 ├── scripts/
 │   └── download_weights.sh     # One-shot Google Drive checkpoint downloader
-├── assets/                     # Sample source / driving / reference clips + demo gifs
+├── assets/                     # Sample source / driving clips + demo gifs
 ├── pretrained_weights/         # Place downloaded checkpoints here
 ├── animations/                 # Inference outputs are written here
 ├── requirements.txt
@@ -274,8 +274,6 @@ This work is built on top of, and uses code / models from, several excellent
 open-source projects:
 
 - [LivePortrait](https://github.com/KlingAIResearch/LivePortrait) — the appearance feature extractor, motion extractor, warping module, SPADE-generator architectures and the keypoint-based animation framework.
-- [FLAME](https://flame.is.tue.mpg.de/) — the head model and vertex masks
-  used in `assets/FLAME_masks/`.
 - [InsightFace](https://github.com/deepinsight/insightface) — face detection
   and ArcFace embeddings used by the cropper.
 - [DINOv2](https://github.com/facebookresearch/dinov2) — the appearance

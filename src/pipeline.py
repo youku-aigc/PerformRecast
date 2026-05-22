@@ -20,7 +20,6 @@ from .utils.rprint import rlog as log
 from .utils.filter import smooth
 from .utils.cropper import Cropper
 from .wrapper import PerformRecastWrapper
-import pickle
 
 
 class PerformRecastPipeline(object):
@@ -35,36 +34,6 @@ class PerformRecastPipeline(object):
 
         self.wrapper = PerformRecastWrapper(inference_cfg=inference_cfg)
         self.cropper = Cropper(crop_cfg=crop_cfg)
-        self.flame_masks = pickle.load(open(f'./assets/FLAME_masks/FLAME_masks.pkl', 'rb'),
-                                       encoding='latin1')
-        self.final_mask = self.flame_masks['face'].tolist()
-        # lip [0,8]
-        self.flame_lip_index = [2840, 2896, 3509, 1793, 1582, 1734, 3531, 2852]
-        # forehead [8,15]
-        self.flame_forehead_index = [3505, 3524, 3540, 3729, 3773, 3874, 3899]
-        # left eyebrow [15, 21]
-        self.flame_left_eyebrow_index = [337, 338, 3154, 3712, 2178, 2177]
-        # right eyebrow [21, 27]
-        self.flame_right_eyebrow_index = [18, 27, 2135, 3868, 673, 672]
-        # left eye [27, 28]
-        self.flame_left_eye_index = [2495]
-        # right eye [28, 29]
-        self.flame_right_eye_index = [1294]
-        # left face [29, 34]
-        self.flame_left_face_index = [3710, 3743, 3116, 3467, 3465]
-        # right face [34, 39]
-        self.flame_right_face_index = [3866, 3881, 2081, 3717, 3715]
-        # nose [39, 44]
-        self.flame_nose_index = [3093, 2750, 3551, 1618, 2058]
-        # contour [44, 47]
-        self.flame_contour_index = [3416, 3414, 3635]
-        self.flame_used_index = (self.flame_lip_index + self.flame_forehead_index +
-                                 self.flame_left_eyebrow_index + self.flame_right_eyebrow_index +
-                                 self.flame_left_eye_index + self.flame_right_eye_index +
-                                 self.flame_left_face_index + self.flame_right_face_index +
-                                 self.flame_nose_index + self.flame_contour_index)
-        self.flame_used_index_in_face = [self.final_mask.index(item) for item in self.flame_used_index]
-        self.flame_used_index_in_face += [-2, -1]
 
     def headpose_pred_to_degree_ours(self, pred):
         device = pred.device

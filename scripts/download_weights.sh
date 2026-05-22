@@ -128,6 +128,3 @@ echo "  ${DEST}"
 echo
 echo "Layout:"
 ( cd "${DEST}" && find . -maxdepth 3 -type f | sort | sed 's|^\./|  |' )
-echo
-echo "(FLAME_masks.pkl ships in this repo's assets/FLAME_masks/ directory"
-echo " and is loaded automatically.)"
